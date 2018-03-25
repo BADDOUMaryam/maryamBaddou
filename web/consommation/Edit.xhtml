@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConsommationEditDlg" widgetVar="ConsommationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConsommationTitle}">
+            <h:form id="ConsommationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{consommationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_factureEau}" for="factureEau" />
+                        <p:selectOneMenu id="factureEau" value="#{consommationController.selected.factureEau}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{factureEauController.itemsAvailableSelectOne}"
+                                           var="factureEauItem"
+                                           itemValue="#{factureEauItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_factureElectricite}" for="factureElectricite" />
+                        <p:selectOneMenu id="factureElectricite" value="#{consommationController.selected.factureElectricite}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{factureElectriciteController.itemsAvailableSelectOne}"
+                                           var="factureElectriciteItem"
+                                           itemValue="#{factureElectriciteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_ancienDate}" for="ancienDate" />
+                        <p:calendar id="ancienDate" pattern="MM/dd/yyyy" value="#{consommationController.selected.ancienDate}" title="#{bundle.EditConsommationTitle_ancienDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_nvDate}" for="nvDate" />
+                        <p:calendar id="nvDate" pattern="MM/dd/yyyy" value="#{consommationController.selected.nvDate}" title="#{bundle.EditConsommationTitle_nvDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_trancheEau}" for="trancheEau" />
+                        <p:selectOneMenu id="trancheEau" value="#{consommationController.selected.trancheEau}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{trancheEauController.itemsAvailableSelectOne}"
+                                           var="trancheEauItem"
+                                           itemValue="#{trancheEauItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_trancheElectricite}" for="trancheElectricite" />
+                        <p:selectOneMenu id="trancheElectricite" value="#{consommationController.selected.trancheElectricite}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{trancheElectriciteController.itemsAvailableSelectOne}"
+                                           var="trancheElectriciteItem"
+                                           itemValue="#{trancheElectriciteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{consommationController.selected.id}" title="#{bundle.EditConsommationTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_mois}" for="mois" />
+                        <p:inputText id="mois" value="#{consommationController.selected.mois}" title="#{bundle.EditConsommationTitle_mois}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_annee}" for="annee" />
+                        <p:inputText id="annee" value="#{consommationController.selected.annee}" title="#{bundle.EditConsommationTitle_annee}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_paiementItem}" for="paiementItem" />
+                        <p:selectOneMenu id="paiementItem" value="#{consommationController.selected.paiementItem}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{paiementItemController.itemsAvailableSelectOne}"
+                                           var="paiementItemItem"
+                                           itemValue="#{paiementItemItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_difference}" for="difference" />
+                        <p:inputText id="difference" value="#{consommationController.selected.difference}" title="#{bundle.EditConsommationTitle_difference}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_ancienIndex}" for="ancienIndex" />
+                        <p:inputText id="ancienIndex" value="#{consommationController.selected.ancienIndex}" title="#{bundle.EditConsommationTitle_ancienIndex}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_nvIndex}" for="nvIndex" />
+                        <p:inputText id="nvIndex" value="#{consommationController.selected.nvIndex}" title="#{bundle.EditConsommationTitle_nvIndex}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{consommationController.selected.type}" title="#{bundle.EditConsommationTitle_type}" />
+                        <p:outputLabel value="#{bundle.EditConsommationLabel_client}" for="client" />
+                        <p:selectOneMenu id="client" value="#{consommationController.selected.client}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientController.itemsAvailableSelectOne}"
+                                           var="clientItem"
+                                           itemValue="#{clientItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{consommationController.update}" value="#{bundle.Save}" update="display,:ConsommationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConsommationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConsommationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
